@@ -83,6 +83,40 @@ namespace UIColors
     
     // Default theme (cyan)
     inline JewelTheme defaultTheme() { return JewelTheme(jewelCyan); }
+
+    // Shared component colours (derived from the dark palette + jewel tones)
+    namespace Component
+    {
+        // Buttons
+        inline const juce::Colour buttonBackground { 0xff2a2a2a };
+        inline const juce::Colour buttonBackgroundHover { 0xff353535 };
+        inline const juce::Colour buttonBackgroundDown { 0xff1e1e1e };
+        inline const juce::Colour buttonBorder { 0xff444444 };
+        inline const juce::Colour buttonText { 0xffcccccc };
+        inline const juce::Colour buttonTextDown { 0xffffffff };
+
+        // ComboBox
+        inline const juce::Colour comboBackground { 0xff222222 };
+        inline const juce::Colour comboArrow { 0xff888888 };
+        inline const juce::Colour comboPopupBackground { 0xff1e1e1e };
+        inline const juce::Colour comboPopupHighlight { 0xff333333 };
+
+        // Toggle / checkbox
+        inline const juce::Colour toggleOff { 0xff444444 };
+        inline const juce::Colour toggleTrack { 0xff2a2a2a };
+
+        // Linear slider
+        inline const juce::Colour sliderTrack { 0xff2a2a2a };
+        inline const juce::Colour sliderTrackFill { 0xff3a3a3a };
+
+        // Focus ring (jewel-tone glow applied to any focused component)
+        inline const juce::Colour focusBorder = jewelCyan.withAlpha(0.5f);
+
+        // Tab bar
+        inline const juce::Colour tabBarBackground { 0xff242424 };
+        inline const juce::Colour tabActive { 0xff4a4a4a };
+        inline const juce::Colour tabInactive { 0xff363636 };
+    }
 }
 
 } // namespace ui
