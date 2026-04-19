@@ -8,8 +8,8 @@ Modern UI components with jewel-tone styling for JUCE audio plugins.
 - **UIConstants**: Consistent spacing, sizing, and layout constants
 - **CustomKnobLookAndFeel**: Beautiful rotary knobs with customizable colors
 - **FlexBox**: Simplified flexbox layout utilities
-- **EmitterCard**: Complete parameter card component with knobs and controls
-- **ParticleFieldVisualizer**: Real-time particle physics visualizer
+
+This is a foundational UI module providing reusable styling and layout components for JUCE audio plugins.
 
 ## Installation
 
@@ -83,22 +83,9 @@ Beautiful rotary knobs with:
 - Smooth gradients and glow effects
 - Consistent sizing and behavior
 
-### EmitterCard
+### FlexBox
 
-Complete parameter card with:
-- Sound pack selector
-- Activity, pitch drift, and volume controls
-- LFO section with rate, depth, wave shape, and target
-- Playing state indicator and countdown timer
-- Progress bar
-
-### ParticleFieldVisualizer
-
-Real-time particle physics visualization:
-- Emitter attractors with glow effects
-- Particle streams and burst animations
-- 60 FPS smooth rendering
-- Configurable emitter states
+Simplified flexbox layout utilities for easier component positioning and sizing.
 
 ## Requirements
 

@@ -7,5 +7,3 @@
 
 // Include component implementations
 #include "components/FlexBox.cpp"
-#include "components/EmitterCard.cpp"
-#include "components/ParticleFieldVisualizer.cpp"
