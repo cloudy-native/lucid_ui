@@ -27,6 +27,9 @@ public:
 
     void setAccentColour(const juce::Colour& accent) { theme = UIColors::JewelTheme(accent); }
 
+    /** Set a custom font for the slider text box (overrides the default 12px). */
+    void setTextBoxFont(const juce::Font& font) { customTextBoxFont = font; hasCustomFont = true; }
+
     void drawLinearSlider(juce::Graphics& g,
                           int x, int y, int width, int height,
                           float sliderPos, float minSliderPos, float maxSliderPos,
@@ -45,7 +48,7 @@ public:
     juce::Label* createSliderTextBox(juce::Slider& slider) override
     {
         auto* label = juce::LookAndFeel_V4::createSliderTextBox(slider);
-        label->setFont(juce::Font(12.0f));
+        label->setFont(hasCustomFont ? customTextBoxFont : juce::Font(juce::FontOptions { 12.0f }));
         label->setColour(juce::Label::textColourId, UIColors::textPrimary);
         label->setColour(juce::Label::backgroundColourId, UIColors::cardBackground);
         label->setColour(juce::Label::outlineColourId, UIColors::cardBackgroundLight);
@@ -134,6 +137,8 @@ private:
     }
 
     UIColors::JewelTheme theme;
+    juce::Font customTextBoxFont { juce::FontOptions { 12.0f } };
+    bool hasCustomFont = false;
 };
 
 } // namespace ui

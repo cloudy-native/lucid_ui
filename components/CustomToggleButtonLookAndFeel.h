@@ -23,6 +23,10 @@ public:
 
     void setAccentColour(const juce::Colour& accent) { theme = UIColors::JewelTheme(accent); }
 
+    /** Override the default label font size. If set to > 0, this value is used
+        instead of the default dynamic sizing. */
+    void setFontSize(float size) { customFontSize = size; }
+
     void drawToggleButton(juce::Graphics& g,
                           juce::ToggleButton& button,
                           bool shouldDrawButtonAsHighlighted,
@@ -85,7 +89,10 @@ public:
             : UIColors::textSecondary;
 
         g.setColour(textCol);
-        g.setFont(juce::FontOptions(juce::jmin(14.0f, bounds.getHeight() * 0.5f)));
+        float fontSize = (customFontSize > 0.0f)
+            ? customFontSize
+            : juce::jmin(14.0f, bounds.getHeight() * 0.5f);
+        g.setFont(juce::FontOptions(fontSize));
         g.drawFittedText(button.getButtonText(),
                          textBounds.toNearestInt(),
                          juce::Justification::centredLeft, 1);
@@ -93,6 +100,7 @@ public:
 
 private:
     UIColors::JewelTheme theme;
+    float customFontSize = 0.0f;
 };
 
 } // namespace ui

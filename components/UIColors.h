@@ -16,7 +16,7 @@ namespace UIColors
     
     // Text colors
     inline const juce::Colour textPrimary { 0xffcccccc };
-    inline const juce::Colour textSecondary { 0xff999999 };
+    inline const juce::Colour textSecondary { 0xffb0b0b0 };
     inline const juce::Colour textDark { 0xff000000 };
     
     // Jewel tone base colors for dials
@@ -102,7 +102,7 @@ namespace UIColors
         inline const juce::Colour comboPopupHighlight { 0xff333333 };
 
         // Toggle / checkbox
-        inline const juce::Colour toggleOff { 0xff444444 };
+        inline const juce::Colour toggleOff { 0xff5a5a5a };
         inline const juce::Colour toggleTrack { 0xff2a2a2a };
 
         // Linear slider
