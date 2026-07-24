@@ -35,14 +35,15 @@ void FlexBox::performLayout()
         return;
     
     const bool isRow = (direction == FlexDirection::Row);
-    const int mainSize = isRow ? bounds.getWidth() : bounds.getHeight();
-    const int crossSize = isRow ? bounds.getHeight() : bounds.getWidth();
+    // Snap float bounds to integer layout units at the boundary (setBounds is int).
+    const int mainSize  = juce::roundToInt (isRow ? bounds.getWidth()  : bounds.getHeight());
+    const int crossSize = juce::roundToInt (isRow ? bounds.getHeight() : bounds.getWidth());
     
     // Calculate total flex basis and flexible space
     float totalFlexBasis = 0.0f;
     float totalFlexGrow = 0.0f;
     int fixedSize = 0;
-    int numGaps = static_cast<int>(items.size()) - 1;
+    const int numGaps = juce::jmax (0, static_cast<int> (items.size()) - 1);
     
     for (const auto& item : items)
     {
@@ -54,16 +55,16 @@ void FlexBox::performLayout()
         else
         {
             if (isRow)
-                fixedSize += static_cast<int>(item.width > 0 ? item.width : 0);
+                fixedSize += juce::roundToInt (item.width > 0.0f ? item.width : 0.0f);
             else
-                fixedSize += static_cast<int>(item.height > 0 ? item.height : 0);
+                fixedSize += juce::roundToInt (item.height > 0.0f ? item.height : 0.0f);
         }
     }
     
-    int availableSpace = mainSize - fixedSize - static_cast<int>(gap * numGaps);
+    const int availableSpace = mainSize - fixedSize - juce::roundToInt (gap * static_cast<float> (numGaps));
     
     // Calculate positions based on justify content
-    int mainPos = isRow ? bounds.getX() : bounds.getY();
+    int mainPos = juce::roundToInt (isRow ? bounds.getX() : bounds.getY());
     int extraSpace = 0;
     int spaceBetween = 0;
     
@@ -102,20 +103,21 @@ void FlexBox::performLayout()
         int itemMainSize;
         if (item.flexGrow > 0.0f && totalFlexGrow > 0.0f)
         {
-            float flexSpace = (availableSpace - totalFlexBasis) * (item.flexGrow / totalFlexGrow);
-            itemMainSize = static_cast<int>(item.flexBasis + flexSpace);
+            const float freeSpace = static_cast<float> (availableSpace) - totalFlexBasis;
+            const float flexSpace = freeSpace * (item.flexGrow / totalFlexGrow);
+            itemMainSize = juce::roundToInt (item.flexBasis + flexSpace);
         }
         else
         {
-            itemMainSize = static_cast<int>(isRow ? item.width : item.height);
+            itemMainSize = juce::roundToInt (isRow ? item.width : item.height);
         }
         
         // Calculate cross axis size and position
-        int itemCrossSize = static_cast<int>(isRow ? item.height : item.width);
+        int itemCrossSize = juce::roundToInt (isRow ? item.height : item.width);
         if (itemCrossSize < 0)
             itemCrossSize = crossSize;
         
-        int crossPos = isRow ? bounds.getY() : bounds.getX();
+        int crossPos = juce::roundToInt (isRow ? bounds.getY() : bounds.getX());
         
         switch (alignItems)
         {
@@ -145,7 +147,7 @@ void FlexBox::performLayout()
         item.component->setBounds(marginBounds.toNearestInt());
         
         // Advance main position
-        mainPos += itemMainSize + static_cast<int>(gap);
+        mainPos += itemMainSize + juce::roundToInt (gap);
         
         if (justifyContent == JustifyContent::SpaceBetween)
             mainPos += spaceBetween;

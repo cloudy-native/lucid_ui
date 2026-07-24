@@ -75,7 +75,8 @@ public:
 
     juce::Font getTextButtonFont(juce::TextButton& /*button*/, int buttonHeight) override
     {
-        return juce::FontOptions(juce::jmin(15.0f, buttonHeight * 0.55f)).withStyle("Bold");
+        return juce::FontOptions(juce::jmin(15.0f, static_cast<float>(buttonHeight) * 0.55f))
+            .withStyle("Bold");
     }
 
 private:

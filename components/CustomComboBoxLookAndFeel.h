@@ -66,7 +66,7 @@ public:
             if (isButtonDown) { top = top.darker(0.1f); bot = bot.darker(0.1f); }
             else if (hovered) { top = top.brighter(0.04f); bot = bot.brighter(0.02f); }
 
-            juce::ColourGradient grad(top, 0, 0, bot, 0, (float) height, false);
+            juce::ColourGradient grad(top, 0.0f, 0.0f, bot, 0.0f, static_cast<float>(height), false);
             g.setGradientFill(grad);
             g.fillRoundedRectangle(bounds, cr);
         }

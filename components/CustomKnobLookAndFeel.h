@@ -25,7 +25,7 @@ public:
     
     void drawRotarySlider(juce::Graphics& g, int x, int y, int width, int height,
                          float sliderPos, float rotaryStartAngle, float rotaryEndAngle,
-                         juce::Slider& slider) override
+                         juce::Slider& /*slider*/) override
     {
         auto bounds = juce::Rectangle<int>(x, y, width, height).toFloat().reduced(4.0f);
         auto radius = juce::jmin(bounds.getWidth(), bounds.getHeight()) / 2.0f;
@@ -84,7 +84,7 @@ public:
     juce::Label* createSliderTextBox(juce::Slider& slider) override
     {
         auto* label = juce::LookAndFeel_V4::createSliderTextBox(slider);
-        label->setFont(juce::Font(UIConstants::smallFontSize));
+        label->setFont(juce::Font(juce::FontOptions { UIConstants::smallFontSize }));
         label->setJustificationType(juce::Justification::centred);
         return label;
     }

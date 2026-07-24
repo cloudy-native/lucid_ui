@@ -104,7 +104,7 @@ public:
     int getTabButtonBestWidth(juce::TabBarButton& button, int tabDepth) override
     {
         juce::GlyphArrangement ga;
-        ga.addLineOfText(getTabButtonFont(button, tabDepth),
+        ga.addLineOfText(getTabButtonFont(button, static_cast<float>(tabDepth)),
                          button.getButtonText(), 0.0f, 0.0f);
         int textWidth = (int) std::ceil(
             ga.getBoundingBox(0, -1, true).getWidth());

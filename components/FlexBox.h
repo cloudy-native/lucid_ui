@@ -37,11 +37,11 @@ public:
     FlexItem() = default;
     explicit FlexItem(juce::Component* comp) : component(comp) {}
     
-    FlexItem& withFlex(float flexGrow, float flexShrink = 1.0f, float flexBasis = 0.0f)
+    FlexItem& withFlex(float grow, float shrink = 1.0f, float basis = 0.0f)
     {
-        this->flexGrow = flexGrow;
-        this->flexShrink = flexShrink;
-        this->flexBasis = flexBasis;
+        flexGrow = grow;
+        flexShrink = shrink;
+        flexBasis = basis;
         return *this;
     }
     
