@@ -40,20 +40,19 @@ public:
         auto boxBounds = juce::Rectangle<float>(2.0f, boxY, boxSize, boxSize);
 
         bool isOn = button.getToggleState();
+        const bool enabled = button.isEnabled();
+        const float dim = enabled ? 1.0f : 0.28f;
 
         if (isOn)
         {
-            // Filled jewel-tone box
             juce::Colour fill = theme.base;
             if (shouldDrawButtonAsDown)
                 fill = theme.dark;
             else if (shouldDrawButtonAsHighlighted)
                 fill = theme.light;
-
-            g.setColour(fill);
+            g.setColour(fill.withMultipliedAlpha(dim));
             g.fillRoundedRectangle(boxBounds, cornerRadius);
 
-            // Checkmark
             juce::Path tick;
             float x = boxBounds.getX();
             float y = boxBounds.getY();
@@ -61,34 +60,28 @@ public:
             tick.lineTo(x + boxSize * 0.42f, y + boxSize - 4.5f);
             tick.lineTo(x + boxSize - 3.5f, y + 4.5f);
 
-            g.setColour(juce::Colours::white);
+            g.setColour(juce::Colours::white.withMultipliedAlpha(dim));
             g.strokePath(tick, juce::PathStrokeType(2.0f,
                 juce::PathStrokeType::mitered,
                 juce::PathStrokeType::rounded));
         }
         else
         {
-            // Empty box with border
             juce::Colour border = UIColors::Component::toggleOff;
             if (shouldDrawButtonAsHighlighted)
                 border = theme.border;
 
-            g.setColour(UIColors::Component::toggleTrack);
+            g.setColour(UIColors::Component::toggleTrack.withMultipliedAlpha(dim));
             g.fillRoundedRectangle(boxBounds, cornerRadius);
 
-            g.setColour(border);
+            g.setColour(border.withMultipliedAlpha(dim));
             g.drawRoundedRectangle(boxBounds, cornerRadius, 1.2f);
         }
 
-        // Label text
         float textX = boxBounds.getRight() + 8.0f;
         auto textBounds = bounds.withLeft(textX).withTrimmedRight(2.0f);
 
-        juce::Colour textCol = button.isEnabled()
-            ? UIColors::textPrimary
-            : UIColors::textSecondary;
-
-        g.setColour(textCol);
+        g.setColour(UIColors::textPrimary.withMultipliedAlpha(dim));
         float fontSize = (customFontSize > 0.0f)
             ? customFontSize
             : juce::jmin(14.0f, bounds.getHeight() * 0.5f);
